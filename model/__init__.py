@@ -1,1 +1,1 @@
-from .convModel import ConvModel
+from .conv2D import ConvModel
