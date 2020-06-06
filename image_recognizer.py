@@ -74,17 +74,16 @@ class ImageRecognizer:
 
       if ret == True:
         targets = self._detect_target_images(frame, self.classifier)
-        if isinstance(targets, np.ndarray):
-          targets = self._extract_targets_from_images(frame, targets)
-          for target in targets:
-            target = cv2.resize(target, self._image_size)
-            name = self._identify_target(target)
-            if name:
-              self._greet(name)
-            else:
-              new_name = self._ask_for_name(target)
-              self._greet(new_name)
-              self._train_new_name(target, new_name)
+        targets = self._extract_targets_from_images(frame, targets)
+        for target in targets:
+          target = cv2.resize(target, self._image_size)
+          name = self._identify_target(target)
+          if name:
+            self._greet(name)
+          else:
+            new_name = self._ask_for_name(target)
+            self._greet(new_name)
+            self._train_new_name(target, new_name)
 
       # Stop if escape key is pressed
       if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -96,7 +95,7 @@ class ImageRecognizer:
 
 if __name__ == "__main__":
   ImageRecognizer(cascade_configuration_path='./haarcascades/haarcascade_frontalface_alt.xml',
-                  model_weights_path='./model/model_weights.h5',
+                  model_weights_path='./model/model_weightss.h5',
                   dataset_directory_path='./dataset/',
                   image_size=(50, 50),
                   capture_video_path=None).run()
